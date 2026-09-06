@@ -1,1 +1,0 @@
-log entry aws s3 cp old-log.txt
