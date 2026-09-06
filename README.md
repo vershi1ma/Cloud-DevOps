@@ -24,7 +24,7 @@ Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Gro
 (self-healing infrastructure) · Application Load Balancers & Target Groups ·
 CloudWatch metrics & alarms · EC2 cost models (On-Demand vs Spot) · DNS · TLS/SSL
 certificate issuance (Let's Encrypt/ACME) · Apache configuration · Linux system
-administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall
+administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning)
 
 ## Detailed write-ups
 - [Core Deployment & Security](docs/01-core-deployment.md)
