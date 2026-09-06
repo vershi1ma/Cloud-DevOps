@@ -17,6 +17,8 @@ Traffic is served over HTTPS using a free domain and a Let's Encrypt certificate
 Access is via AWS Systems Manager Session Manager (IAM role-based, no open SSH port).
 Account activity is captured via a dedicated CloudTrail trail, and data at rest (S3
 objects, EBS volumes) is encrypted using customer-managed AWS KMS keys.
+A separate public S3 bucket serves a live static website directly from S3, with no
+EC2 instance or web server involved.
 
 ## Skills demonstrated
 IAM · EC2 · Security Groups & Network ACLs · EBS (volumes, snapshots) · Elastic IPs ·
@@ -24,7 +26,7 @@ Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Gro
 (self-healing infrastructure) · Application Load Balancers & Target Groups ·
 CloudWatch metrics & alarms · EC2 cost models (On-Demand vs Spot) · DNS · TLS/SSL
 certificate issuance (Let's Encrypt/ACME) · Apache configuration · Linux system
-administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies)
+administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting)
 
 ## Detailed write-ups
 - [Core Deployment & Security](docs/01-core-deployment.md)
@@ -43,5 +45,6 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
     - [S3 Bucket Fundamentals](docs/10-s3/01-bucket-fundamentals.md)
     - [S3 Versioning](docs/10-s3/02-versioning.md)
     - [S3 Lifecycle Policies](docs/10-s3/03-lifecycle-policies.md)
+    - [S3 Static Website Hosting](docs/10-s3/04-static-website-hosting.md)
 
 Each write-up covers what was built and the real problems hit and fixed along the way.
