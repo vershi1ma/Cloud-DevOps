@@ -3,7 +3,7 @@
 ## Overview
 An evolving cloud engineering portfolio built while working toward a cloud/DevOps role.
 It started as a single EC2 web server and has grown into a self-healing, load-balanced,
-HTTPS-secured, encryption-hardened, and audit-logged web tier — with security
+HTTPS-secured, encryption-hardened, and audit logged web tier — with security
 (IAM, KMS, CloudTrail, Secrets Manager) treated as a first-class concern throughout,
 not bolted on at the end. Ongoing work extends into S3, serverless (Lambda), databases
 (RDS), and cloud-agnostic tooling (Terraform, containers, CI/CD), entirely using
@@ -16,7 +16,7 @@ instance, later extended with a reusable Launch Template, an Auto Scaling Group
 Traffic is served over HTTPS using a free domain and a Let's Encrypt certificate.
 Access is via AWS Systems Manager Session Manager (IAM role-based, no open SSH port).
 Account activity is captured via a dedicated CloudTrail trail, and data at rest (S3
-objects, EBS volumes) is encrypted using customer-managed AWS KMS keys.
+objects, EBS volumes) is encrypted using customer managed AWS KMS keys.
 A separate public S3 bucket serves a live static website directly from S3, with no
 EC2 instance or web server involved.
 
