@@ -21,5 +21,6 @@ resource "aws_instance" "cloudlearner_server" {
   tags = {
     Name          = "Cloudlearner-server"
     "Patch Group" = "Cloudlearner"
+    ManagedBy     = "Terraform"
   }
 }
