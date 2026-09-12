@@ -24,3 +24,29 @@ resource "aws_instance" "cloudlearner_server" {
     ManagedBy     = "Terraform"
   }
 }
+
+resource "aws_s3_bucket" "cloudlearner_website" {
+  bucket = "cloudlearner-website-vershi1ma"
+
+  tags = {
+    Name      = "Cloudlearner-website"
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_s3_bucket_website_configuration" "cloudlearner_website" {
+  bucket = aws_s3_bucket.cloudlearner_website.id
+
+  index_document {
+    suffix = "index.html"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "cloudlearner_website" {
+  bucket = aws_s3_bucket.cloudlearner_website.id
+
+  block_public_acls       = false
+  ignore_public_acls      = false
+  block_public_policy     = false
+  restrict_public_buckets = false
+}
