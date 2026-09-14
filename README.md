@@ -22,7 +22,10 @@ EC2 instance or web server involved. The EC2 instance and the S3 static site buc
 are both managed as infrastructure as code via Terraform, which runs directly on the
 EC2 instance (Terraform's Go runtime is incompatible with iSH/iPadOS emulation, so it
 executes on a real Linux host instead) rather than in the iSH CLI environment used for
-day-to-day AWS CLI and git work.
+day-to-day AWS CLI and git work. A second, dedicated EC2 instance runs Docker and a
+lightweight single-node Kubernetes cluster (k3s), hosting a custom-built container
+image as a self-healing Deployment behind a Service — the container-orchestration
+equivalent of the Auto Scaling Group and Load Balancer used by the main web tier.
 
 ## Skills demonstrated
 IAM · EC2 · Security Groups & Network ACLs · EBS (volumes, snapshots) · Elastic IPs ·
@@ -30,7 +33,7 @@ Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Gro
 (self-healing infrastructure) · Application Load Balancers & Target Groups ·
 CloudWatch metrics & alarms · EC2 cost models (On-Demand vs Spot) · DNS · TLS/SSL
 certificate issuance (Let's Encrypt/ACME) · Apache configuration · Linux system
-administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation)
+administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation) · Docker (image builds, Dockerfiles, container networking) · Kubernetes/k3s (Pods, Deployments, Services, self-healing via reconciliation loops, resource-constrained troubleshooting)
 
 ## Detailed write-ups
 - [Core Deployment & Security](docs/01-core-deployment.md)
@@ -57,5 +60,6 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
     - [Lambda + RDS Integration](docs/11-lambda-rds/04-lambda-rds-integration.md)
   - Module 12 — Cloud-Agnostic Tooling
     - [Terraform: Adopting Existing Infrastructure](docs/12-terraform/01-terraform-import.md)
+    - [Docker & k3s: Packaging and Orchestrating a Container](docs/12-docker-k3s/02-docker-k3s.md)
 
 Each write-up covers what was built and the real problems hit and fixed along the way.
