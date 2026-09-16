@@ -1,0 +1,20 @@
+name: Build Docker Image
+
+on:
+  push:
+    paths:
+      - 'my-first-app/**'
+  pull_request:
+    paths:
+      - 'my-first-app/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        working-directory: ./my-first-app
+        run: docker build -t my-first-app .
