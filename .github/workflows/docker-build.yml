@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -18,3 +18,11 @@ jobs:
       - name: Build Docker image
         working-directory: ./my-first-app
         run: docker build -t my-first-app .
+
+      - name: Import image into k3s
+        run: |
+          docker save -o /tmp/my-first-app.tar my-first-app
+          sudo k3s ctr images import /tmp/my-first-app.tar
+
+      - name: Roll out new version
+        run: sudo kubectl rollout restart deployment/my-first-app
