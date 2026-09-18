@@ -4,9 +4,13 @@ on:
   push:
     paths:
       - 'my-first-app/**'
+      - 'microservices/backend/**'
+      - 'microservices/frontend/**'
   pull_request:
     paths:
       - 'my-first-app/**'
+      - 'microservices/backend/**'
+      - 'microservices/frontend/**'
 
 jobs:
   build:
@@ -15,14 +19,59 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Detect changed paths
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            main_app:
+              - 'my-first-app/**'
+            backend:
+              - 'microservices/backend/**'
+            frontend:
+              - 'microservices/frontend/**'
+
+      - name: Build my-first-app image
+        if: steps.filter.outputs.main_app == 'true'
         working-directory: ./my-first-app
         run: docker build -t my-first-app .
 
-      - name: Import image into k3s
+      - name: Import my-first-app image into k3s
+        if: steps.filter.outputs.main_app == 'true'
         run: |
           docker save -o /tmp/my-first-app.tar my-first-app
           sudo k3s ctr images import /tmp/my-first-app.tar
 
-      - name: Roll out new version
+      - name: Roll out my-first-app
+        if: steps.filter.outputs.main_app == 'true'
         run: sudo kubectl rollout restart deployment/my-first-app
+
+      - name: Build backend image
+        if: steps.filter.outputs.backend == 'true'
+        working-directory: ./microservices/backend
+        run: docker build -t backend-service .
+
+      - name: Import backend image into k3s
+        if: steps.filter.outputs.backend == 'true'
+        run: |
+          docker save -o /tmp/backend-service.tar backend-service
+          sudo k3s ctr images import /tmp/backend-service.tar
+
+      - name: Roll out backend
+        if: steps.filter.outputs.backend == 'true'
+        run: sudo kubectl rollout restart deployment/backend-deployment
+
+      - name: Build frontend image
+        if: steps.filter.outputs.frontend == 'true'
+        working-directory: ./microservices/frontend
+        run: docker build -t frontend-service .
+
+      - name: Import frontend image into k3s
+        if: steps.filter.outputs.frontend == 'true'
+        run: |
+          docker save -o /tmp/frontend-service.tar frontend-service
+          sudo k3s ctr images import /tmp/frontend-service.tar
+
+      - name: Roll out frontend
+        if: steps.filter.outputs.frontend == 'true'
+        run: sudo kubectl rollout restart deployment/frontend-deployment
