@@ -32,6 +32,9 @@ new version — a full CI/CD pipeline with no inbound ports and no manual deploy
 That same self-hosted runner and image-import pipeline also drives two independent
 microservices (a backend and a frontend communicating over k3s's internal DNS), each
 buildable, testable, and deployable on its own via path-filtered CI/CD.
+A separate DynamoDB table, paired with its own purpose-built Lambda function
+and least-privilege IAM role, adds a NoSQL data-store example alongside the
+existing RDS one.
 
 ## Skills demonstrated
 IAM · EC2 · Security Groups & Network ACLs · EBS (volumes, snapshots) · Elastic IPs ·
@@ -39,7 +42,7 @@ Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Gro
 (self-healing infrastructure) · Application Load Balancers & Target Groups ·
 CloudWatch metrics & alarms · EC2 cost models (On-Demand vs Spot) · DNS · TLS/SSL
 certificate issuance (Let's Encrypt/ACME) · Apache configuration · Linux system
-administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation) · Docker (image builds, Dockerfiles, container networking) · Kubernetes/k3s (Pods, Deployments, Services, self-healing via reconciliation loops, resource-constrained troubleshooting) · GitHub Actions CI/CD (self-hosted runners, systemd service management, automated build-import-rollout pipelines, path-filtered conditional pipelines for independent service deploys) · Microservices architecture (service decomposition, internal service discovery via Kubernetes DNS, config separation via environment variables)
+administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation) · Docker (image builds, Dockerfiles, container networking) · Kubernetes/k3s (Pods, Deployments, Services, self-healing via reconciliation loops, resource-constrained troubleshooting) · GitHub Actions CI/CD (self-hosted runners, systemd service management, automated build-import-rollout pipelines, path-filtered conditional pipelines for independent service deploys) · Microservices architecture (service decomposition, internal service discovery via Kubernetes DNS, config separation via environment variables) · Amazon DynamoDB (partition/sort key table design, on-demand billing, Lambda integration via boto3, Decimal-type handling)
 
 ## Detailed write-ups
 - [Core Deployment & Security](docs/01-core-deployment.md)
@@ -70,5 +73,7 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
     - [CI/CD: Self-Hosted GitHub Actions Runner](docs/12-docker-k3s/03-cicd-self-hosted-runner.md)
   - Module 13 — Microservices
     - [Microservices: Independent Services on k3s](docs/13-microservices/01-microservices.md)
+  - Module 14 — DynamoDB
+    - [DynamoDB: NoSQL Data Storage with Lambda](docs/14-dynamodb/01-dynamodb.md)
 
 Each write-up covers what was built and the real problems hit and fixed along the way.
