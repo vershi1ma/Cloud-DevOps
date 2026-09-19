@@ -24,7 +24,7 @@ EC2 instance (Terraform's Go runtime is incompatible with iSH/iPadOS emulation, 
 executes on a real Linux host instead) rather than in the iSH CLI environment used for
 day-to-day AWS CLI and git work. A second, dedicated EC2 instance runs Docker and a
 lightweight single-node Kubernetes cluster (k3s), hosting a custom-built container
-image as a self-healing Deployment behind a Service — the container-orchestration
+image as a self healing Deployment behind a Service — the container-orchestration
 equivalent of the Auto Scaling Group and Load Balancer used by the main web tier.
 A self-hosted GitHub Actions runner installed on that same instance closes the loop:
 a `git push` automatically builds the image, imports it into k3s, and rolls out the
