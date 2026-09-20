@@ -35,6 +35,10 @@ buildable, testable, and deployable on its own via path-filtered CI/CD.
 A separate DynamoDB table, paired with its own purpose-built Lambda function
 and least-privilege IAM role, adds a NoSQL data-store example alongside the
 existing RDS one.
+A hand-built VPC — public/private subnets, an Internet Gateway, and a NAT
+Gateway proven live via a private-subnet instance with real outbound-only
+internet access — grounds the networking layer every resource here already
+runs on.
 
 ## Skills demonstrated
 IAM · EC2 · Security Groups & Network ACLs · EBS (volumes, snapshots) · Elastic IPs ·
@@ -42,7 +46,7 @@ Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Gro
 (self-healing infrastructure) · Application Load Balancers & Target Groups ·
 CloudWatch metrics & alarms · EC2 cost models (On-Demand vs Spot) · DNS · TLS/SSL
 certificate issuance (Let's Encrypt/ACME) · Apache configuration · Linux system
-administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation) · Docker (image builds, Dockerfiles, container networking) · Kubernetes/k3s (Pods, Deployments, Services, self-healing via reconciliation loops, resource-constrained troubleshooting) · GitHub Actions CI/CD (self-hosted runners, systemd service management, automated build-import-rollout pipelines, path-filtered conditional pipelines for independent service deploys) · Microservices architecture (service decomposition, internal service discovery via Kubernetes DNS, config separation via environment variables) · Amazon DynamoDB (partition/sort key table design, on-demand billing, Lambda integration via boto3, Decimal-type handling)
+administration and dependency troubleshooting · AWS KMS (customer-managed keys, envelope encryption) · S3 & EBS encryption at rest · CloudTrail (audit logging) · AWS CLI (Alpine Linux / iSH) · AWS Systems Manager Parameter Store & Secrets Manager · Amazon GuardDuty (threat detection) · Route 53 Resolver DNS Firewall · AWS Network Firewall · Amazon S3 (buckets, storage classes, versioning, lifecycle policies, static website hosting) · AWS Lambda (serverless functions, execution roles, S3 event triggers) · Amazon RDS (managed PostgreSQL, security-group-scoped access) · Lambda VPC networking (security groups, subnets, dependency packaging) · Terraform (infrastructure as code, `import` of pre-existing resources, state management, IAM role scoping for automation) · Docker (image builds, Dockerfiles, container networking) · Kubernetes/k3s (Pods, Deployments, Services, self-healing via reconciliation loops, resource-constrained troubleshooting) · GitHub Actions CI/CD (self-hosted runners, systemd service management, automated build-import-rollout pipelines, path-filtered conditional pipelines for independent service deploys) · Microservices architecture (service decomposition, internal service discovery via Kubernetes DNS, config separation via environment variables) · Amazon DynamoDB (partition/sort key table design, on-demand billing, Lambda integration via boto3, Decimal-type handling) · VPC networking (subnets, route tables, Internet Gateway, NAT Gateway, Security Groups vs. Network ACLs)
 
 ## Detailed write-ups
 - [Core Deployment & Security](docs/01-core-deployment.md)
@@ -75,5 +79,7 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
     - [Microservices: Independent Services on k3s](docs/13-microservices/01-microservices.md)
   - Module 14 — DynamoDB
     - [DynamoDB: NoSQL Data Storage with Lambda](docs/14-dynamodb/01-dynamodb.md)
+  - Module 15 — VPC
+    - [VPC Deep-Dive: Building the Network by Hand](docs/15-vpc/01-vpc-deep-dive.md)
 
 Each write-up covers what was built and the real problems hit and fixed along the way.
