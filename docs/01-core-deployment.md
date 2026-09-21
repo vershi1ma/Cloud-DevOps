@@ -7,6 +7,7 @@
 - Connected via AWS Systems Manager Session Manager (IAM role-based access, no SSH keys or open SSH port required)
 - Took an EBS snapshot for backup/recovery
 - Allocated and associated an Elastic IP for a persistent public address
+- Validated SSH key-based access (ssh-keygen, key-based auth, ~/.ssh/config host aliases) on a separate, temporary instance — confirming familiarity with the near-universal standard while keeping SSH closed by design on the production instances in this deployment
 
 ## Real problems hit and fixed
 - **SSH connectivity failures**: EC2 Instance Connect repeatedly failed from a mobile browser; root-caused to the connection needing to match the client's real-time public IP, which changes frequently on cellular data. Solved by switching to Session Manager (IAM-based access, no inbound SSH dependency at all).
