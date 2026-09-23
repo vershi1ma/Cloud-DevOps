@@ -83,5 +83,7 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
     - [VPC Deep-Dive: Building the Network by Hand](docs/15-vpc/01-vpc-deep-dive.md)
   - Module 16 — API Gateway + Lambda
     - [Public REST API for an Existing Lambda](docs/16-api-gateway-lambda/01-api-gateway-lambda.md)
+  - Module 17 — SQS
+    - [Decoupling Order Writes with SQS](docs/17-sqs/01-sqs.md)
 
 Each write-up covers what was built and the real problems hit and fixed along the way.
