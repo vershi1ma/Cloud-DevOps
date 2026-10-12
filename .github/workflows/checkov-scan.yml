@@ -22,4 +22,6 @@ jobs:
           directory: .
           framework: terraform,kubernetes,dockerfile
           output_format: cli
+          quiet: true
+          compact: true
           soft_fail: true
