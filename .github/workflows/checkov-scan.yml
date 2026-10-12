@@ -1,0 +1,25 @@
+name: Checkov config scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Run Checkov (Terraform, Kubernetes, Dockerfiles)
+        uses: bridgecrewio/checkov-action@5798bad4f6dd9c1fb67ae3ec10d42d8fb67037c4 # v12.3126.0
+        with:
+          directory: .
+          framework: terraform,kubernetes,dockerfile
+          output_format: cli
+          soft_fail: true
