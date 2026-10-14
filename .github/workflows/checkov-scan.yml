@@ -24,4 +24,3 @@ jobs:
           output_format: cli
           quiet: true
           compact: true
-          soft_fail: true
