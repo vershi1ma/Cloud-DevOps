@@ -1,0 +1,30 @@
+# Accepted-risk register. Every skipped ID is a decision with a reason.
+# Add new IDs only with a reason. Global: applies to every resource.
+skip-check:
+  # Dockerfiles
+  - CKV_DOCKER_2   # HEALTHCHECK: Kubernetes uses its own probes instead
+  # Kubernetes: lab design (local images, one namespace)
+  - CKV_K8S_14     # tag latest: local builds, no registry
+  - CKV_K8S_43     # digest: only exists for registry images
+  - CKV_K8S_15     # pull Always: must stay Never, image is local
+  - CKV_K8S_21     # default namespace: one small app
+  - CKV2_K8S_6     # NetworkPolicy: real gap, phase 2
+  # Terraform: website bucket is public on purpose (only index.html)
+  - CKV_AWS_53     # block public ACLs
+  - CKV_AWS_54     # block public policy
+  - CKV_AWS_55     # ignore public ACLs
+  - CKV_AWS_56     # restrict public buckets
+  - CKV2_AWS_6     # public access block must stay open
+  # Terraform: enterprise or paid features, not for a lab
+  - CKV_AWS_135    # EBS optimized
+  - CKV_AWS_126    # detailed monitoring
+  - CKV_AWS_144    # cross-region replication
+  - CKV_AWS_145    # KMS key for S3
+  - CKV_AWS_18     # S3 access logging
+  - CKV2_AWS_61    # S3 lifecycle
+  - CKV2_AWS_62    # S3 event notifications
+  # Terraform: real gaps, phase 2 (live AWS changes, plan first)
+  - CKV_AWS_79     # IMDSv2 on the server
+  - CKV_AWS_8      # EBS encryption (replaces instance)
+  - CKV2_AWS_41    # IAM role on the instance
+  - CKV_AWS_21     # S3 versioning
