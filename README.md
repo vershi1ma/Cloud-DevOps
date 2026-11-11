@@ -21,7 +21,7 @@ administration and dependency troubleshooting · AWS KMS (customer-managed keys,
 - [Core Deployment & Security](docs/01-core-deployment.md)
 - [Automation & Golden Images](docs/02-automation-and-golden-images.md)
 - [Auto Scaling & Load Balancing](docs/03-auto-scaling-and-load-balancing.md)
-- Module 9 — Security Deep-Dive
+- Module 9 — Security
   - [HTTPS with a Free Domain and Let's Encrypt](docs/09-security-deep-dive/01-https-lets-encrypt.md)
   - [CloudTrail (Audit Logging)](docs/09-security-deep-dive/02-cloudtrail.md)
   - [Encryption at Rest (KMS, S3, EBS)](docs/09-security-deep-dive/03-encryption-at-rest.md)
