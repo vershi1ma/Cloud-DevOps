@@ -1,48 +1,14 @@
 # Cloud & DevOps Portfolio
 
-## Overview
-An evolving cloud engineering portfolio built while working toward a cloud/DevOps role.
-It started as a single EC2 web server and has grown into a self-healing, load-balanced,
-HTTPS-secured, encryption-hardened, and audit logged web tier — with security
-(IAM, KMS, CloudTrail, Secrets Manager) treated as a first-class concern throughout,
-not bolted on at the end. Ongoing work extends into S3, serverless (Lambda), databases
-(RDS), and cloud-agnostic tooling (Terraform, containers, CI/CD), entirely using
-free-tier and free-cost resources.
+Hands-on AWS and DevOps projects: a self-healing, HTTPS web tier, a CI/CD pipeline on Kubernetes (k3s), infrastructure as code with Terraform, and serverless services, with security built in from the start.
 
-## Architecture
-A web tier running on Amazon Linux 2023, originally a single manually-configured
-instance, later extended with a reusable Launch Template, an Auto Scaling Group
-(1-3 instances across multiple Availability Zones), and an Application Load Balancer.
-Traffic is served over HTTPS using a free domain and a Let's Encrypt certificate.
-Access is via AWS Systems Manager Session Manager (IAM role-based, no open SSH port).
-Account activity is captured via a dedicated CloudTrail trail, and data at rest (S3
-objects, EBS volumes) is encrypted using customer managed AWS KMS keys.
-A separate public S3 bucket serves a live static website directly from S3, with no
-EC2 instance or web server involved. The EC2 instance and the S3 static site bucket
-are both managed as infrastructure as code via Terraform, which runs directly on the
-EC2 instance (Terraform's Go runtime is incompatible with iSH/iPadOS emulation, so it
-executes on a real Linux host instead) rather than in the iSH CLI environment used for
-day-to-day AWS CLI and git work. A second, dedicated EC2 instance runs Docker and a
-lightweight single-node Kubernetes cluster (k3s), hosting a custom-built container
-image as a self healing Deployment behind a Service — the container-orchestration
-equivalent of the Auto Scaling Group and Load Balancer used by the main web tier.
-A self-hosted GitHub Actions runner installed on that same instance closes the loop:
-a `git push` automatically builds the image, imports it into k3s, and rolls out the
-new version — a full CI/CD pipeline with no inbound ports and no manual deploy step.
-That same self-hosted runner and image-import pipeline also drives two independent
-microservices (a backend and a frontend communicating over k3s's internal DNS), each
-buildable, testable, and deployable on its own via path-filtered CI/CD.
-A separate DynamoDB table, paired with its own purpose-built Lambda function
-and least-privilege IAM role, adds a NoSQL data-store example alongside the
-existing RDS one.
-A hand-built VPC — public/private subnets, an Internet Gateway, and a NAT
-Gateway proven live via a private-subnet instance with real outbound-only
-internet access — grounds the networking layer every resource here already
-runs on.
-A REST API (API Gateway) sits in front of the DynamoDB-backed Lambda, exposing
-it over public HTTPS; that same Lambda now also publishes to an SQS queue on
-every order write, decoupling order creation from downstream processing.
-
+## Highlights
+- **Self-healing web tier:** Auto Scaling Group (1-3 instances, multiple AZs) behind an Application Load Balancer, served over HTTPS (Let's Encrypt). Access through Session Manager, with no open SSH port.
+- **CI/CD on k3s:** a git push builds the image, imports it into k3s and rolls out the new version using a self-hosted GitHub Actions runner. Two independent microservices with path-filtered pipelines.
+- **Security by default:** KMS encryption at rest, CloudTrail audit logging, Secrets Manager, GuardDuty, DNS Firewall, Network Firewall.
+- **Serverless and data:** API Gateway, Lambda, DynamoDB and SQS; Lambda with RDS (PostgreSQL).
+- **Networking:** a hand-built VPC with public and private subnets, Internet Gateway and NAT Gateway.
+- **Infrastructure as code:** Terraform, including importing existing resources.
 ## Skills demonstrated
 IAM · EC2 · Security Groups & Network ACLs · EBS (volumes, snapshots) · Elastic IPs ·
 Bash scripting (user data) · Custom AMIs & Launch Templates · Auto Scaling Groups
